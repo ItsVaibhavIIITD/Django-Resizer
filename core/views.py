@@ -28,12 +28,23 @@ def add_record(request):
         
 @api_view(["POST"])
 def resize_records(request):
+    """
+    Resize all the pending records
+    """
     records_ids = resize_job()
     return Response({"ids": records_ids}, status = status.HTTP_200_OK)
         
 @api_view(["POST"])
 def resize_record(request, id):
-    records_ids = resize(Record.objects.get(pk = id))
+    """
+    Resize a specific record
+    """
+    record = Record.objects.filter(pk = id)
+
+    if not record.exists():
+        return Response({"error": "Invalid record id."}, status = status.HTTP_204_NO_CONTENT)
+    
+    resize(record.first())
     return Response({"id": id}, status = status.HTTP_200_OK)
 
 @api_view(["GET"])
