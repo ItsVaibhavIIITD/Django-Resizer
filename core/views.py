@@ -1,5 +1,5 @@
 from rest_framework import status
-from django.shortcuts import render
+from core.utils import resize_job, resize
 from rest_framework.response import Response
 from core.serializers import RecordSerializer
 from core.models import Record, BackgroundJob
@@ -26,6 +26,15 @@ def add_record(request):
 
     return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
         
+@api_view(["POST"])
+def resize_records(request):
+    records_ids = resize_job()
+    return Response({"ids": records_ids}, status = status.HTTP_200_OK)
+        
+@api_view(["POST"])
+def resize_record(request, id):
+    records_ids = resize(Record.objects.get(pk = id))
+    return Response({"id": id}, status = status.HTTP_200_OK)
 
 @api_view(["GET"])
 def records(request):
