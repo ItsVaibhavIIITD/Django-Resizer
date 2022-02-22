@@ -1,0 +1,21 @@
+from django.db import models
+from secrets import token_hex
+from django.core.validators import MinValueValidator
+
+def record_filename(instance, filename):
+    extension = filename.split('.')[-1]
+    filename = "%s.%s" % (token_hex(32), extension)
+    return f"fishes/{filename}"
+
+class Record(models.Model):
+    name = models.CharField(max_length = 250)
+    image = models.ImageField(upload_to = record_filename, null = False, blank = False)
+    species = models.CharField(max_length = 100)
+    weight = models.FloatField(default = 0.0, validators = [MinValueValidator(0.0)])
+    length = models.FloatField(default = 0.0, validators = [MinValueValidator(0.0)])
+    latitude = models.FloatField(default = 0.0)
+    longitude = models.FloatField(default = 0.0)
+    timestamp = models.DateTimeField()
+
+class BackgroundJob(models.Model):
+    record = models.OneToOneField(Record, on_delete = models.CASCADE, related_name = "job")

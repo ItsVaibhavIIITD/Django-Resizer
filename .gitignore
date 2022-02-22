@@ -1,0 +1,5 @@
+uploads
+*.sqlite3
+*.env
+**/migrations/**
+*.pyc
