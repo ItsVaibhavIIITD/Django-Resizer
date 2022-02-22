@@ -1,5 +1,20 @@
 # Resizer
 
+A REST API to add records and resize them on the fly!
+
+## How to setup?
+* Install Python 3.8.9
+* Run `pip install virtualenv`
+* Create a virtual environment using the command `virtualenv environment`
+* Activate the virtual environment using the command `environment\Scripts\activate`. This will only work for Windows.
+* Install the dependencies using the commnad `pip install -r requirements.txt`
+
+## How to run the project?
+* First, create some database migrations using the command `python manage.py makemigrations core` and then migrate them using the command `python manage.py migrate`
+* Create a superuser using the command `python manage.py createsuperuser` and fill the required details.
+* Admin panel can be accessed at this URL - `http://127.0.0.1:8000/admin/`
+* Run the server using the command `python manage.py runserver`
+
 ## How job scheduling is implemented?
 
 * In order to add job scheduling, a Python package, `APScheduler` is used. 
