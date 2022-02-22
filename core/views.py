@@ -12,7 +12,6 @@ def add_record(request):
     """
     Add a new record to the database
     """
-    print(request.data)
     serializer = RecordSerializer(data = request.data)
 
     if serializer.is_valid():
@@ -22,7 +21,7 @@ def add_record(request):
         BackgroundJob.objects.create(
             record = record
         )
-        return Response(serializer.data, status = status.HTTP_201_CREATED)
+        return Response(RecordSerializer(instance = record, context = {"request": request}).data, status = status.HTTP_201_CREATED)
 
     return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
         

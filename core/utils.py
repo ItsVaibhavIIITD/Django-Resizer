@@ -8,7 +8,12 @@ def resize(instance):
         path = str(instance.record.image)
     elif isinstance(instance, Record):
         path = str(instance.image)
-        
+
+        try:
+            instance.job.delete()
+        except:
+            pass
+
     path = path.replace("/", "\\")
     path = str(settings.MEDIA_ROOT) + "\\" + path
     image = Image.open(path)

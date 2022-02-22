@@ -6,5 +6,4 @@ class CoreConfig(AppConfig):
 
     def ready(self):
         from core.scheduler import resize_images
-        print("Application and Scheduler started!")
         resize_images.start()
