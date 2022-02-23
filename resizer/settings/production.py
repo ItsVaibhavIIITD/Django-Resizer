@@ -10,7 +10,9 @@ INSTALLED_APPS += [
     
 ]
 
-MIDDLEWARE += []
+MIDDLEWARE += [
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+]
 
 TEMPLATES += []
 
