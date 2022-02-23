@@ -1,6 +1,7 @@
 from .base import *
+import django_heroku
 
-ALLOWED_HOSTS += []
+ALLOWED_HOSTS += ["*"]
 
 INSTALLED_APPS += [
     # Internal Apps
@@ -21,3 +22,4 @@ DATABASES = {
 }
 
 AUTH_PASSWORD_VALIDATORS += []
+django_heroku.settings(locals())
