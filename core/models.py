@@ -1,5 +1,7 @@
 from django.db import models
 from secrets import token_hex
+from django.db.models.signals import pre_delete
+from django.dispatch.dispatcher import receiver
 from django.core.validators import MinValueValidator
 
 def record_filename(instance, filename):
@@ -16,6 +18,10 @@ class Record(models.Model):
     latitude = models.FloatField(default = 0.0)
     longitude = models.FloatField(default = 0.0)
     timestamp = models.DateTimeField()
+
+@receiver(pre_delete, sender = Record)
+def record_delete(sender, instance, *args, **kwargs):
+    instance.image.delete(save = False)
 
 class BackgroundJob(models.Model):
     record = models.OneToOneField(Record, on_delete = models.CASCADE, related_name = "job")
