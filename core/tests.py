@@ -56,4 +56,4 @@ class RecordTestCase(APITestCase):
             response = self.client.post(self.resize_all_url, {})
             self.assertEqual(response.status_code, status.HTTP_200_OK)
             self.assertEqual(BackgroundJob.objects.all().count(), 0)
-            Record.objects.get(id = id).delete()
+            # Record.objects.get(id = id).delete()
