@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from rest_framework import status
 from core.utils import resize_job, resize
 from rest_framework.response import Response
@@ -5,6 +6,10 @@ from core.serializers import RecordSerializer
 from core.models import Record, BackgroundJob
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.decorators import api_view, parser_classes
+
+@api_view(["GET"])
+def index(request):
+    return HttpResponse("<h1>Resizer API</h1>")
 
 @api_view(["POST"])
 @parser_classes([MultiPartParser, FormParser])
