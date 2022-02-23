@@ -1,8 +1,9 @@
+*Download / Clone the code from the `main` branch only*
+---
+
 # Resizer
 
 A REST API to add records and resize them on the fly!
-
-Note - Download/Clone the code from the `main` branch.
 
 ## How to setup?
 * Install Python 3.8.9
